@@ -13,22 +13,15 @@ class SuraController extends Controller
     );
 
     public function sura(Request $request) {
-        $sura = Sura::all();
-
-        if (!$sura->isEmpty()) {
-            $this->res['message'] = "Success";
-            $this->res['data'] = $sura;
-        }
-
-        return response()->json($this->res);
-    }
-
-    public function suraTarjim(Request $request) {
         $lang = $request->lang;
 
-        $sura = Sura::with(['tarjim' => function($tarjim) use ($lang) {
-            $tarjim->where('lang', $lang);
-        }])->get();
+        if ($lang == null) {
+          $sura = Sura::all();
+        } else {
+          $sura = Sura::with(['tarjim' => function($tarjim) use ($lang) {
+              $tarjim->where('lang', $lang);
+          }])->get();
+        }
 
         if (!$sura->isEmpty()) {
             $this->res['message'] = "Success";
@@ -37,4 +30,5 @@ class SuraController extends Controller
 
         return response()->json($this->res);
     }
+
 }

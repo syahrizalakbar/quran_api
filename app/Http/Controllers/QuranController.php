@@ -14,24 +14,15 @@ class QuranController extends Controller
 
     public function quran(Request $request) {
         $sura = $request->sura;
-
-        $quran = Quran::where(['sura' => $sura])->get();
-
-        if (!$quran->isEmpty()) {
-            $this->res['message'] = "Success";
-            $this->res['data'] = $quran;
-        }
-
-        return response()->json($this->res);
-    }
-
-    public function quranTarjim(Request $request) {
-        $sura = $request->sura;
         $lang = $request->lang;
 
-        $quran = Quran::where(['sura' => $sura])->with(['tarjim' => function($tarjim) use ($lang) {
-            $tarjim->where('lang', $lang);
-        }])->get();
+        if ($lang == null) {
+          $quran = Quran::where(['sura' => $sura])->get();
+        } else {
+          $quran = Quran::where(['sura' => $sura])->with(['tarjim' => function($tarjim) use ($lang) {
+              $tarjim->where('lang', $lang);
+          }])->get();
+        }
 
         if (!$quran->isEmpty()) {
             $this->res['message'] = "Success";

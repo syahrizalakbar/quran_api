@@ -11,8 +11,5 @@
 |
 */
 
-$router->get('', 'SuraController@sura');
-$router->get('{lang:[a-z]+}', 'SuraController@suraTarjim');
-
-$router->get('{sura:[0-9]+}', 'QuranController@quran');
-$router->get('{sura:[0-9]+}/{lang:[a-z]+}', 'QuranController@quranTarjim');
+$router->get('/sura', 'SuraController@sura');
+$router->get('/sura/{sura:[0-9]+}', 'QuranController@quran');

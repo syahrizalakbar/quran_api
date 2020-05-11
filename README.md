@@ -1,3 +1,13 @@
+# EndPoints
+
+List Sura
+quran_api/public/sura
+quran_api/public/sura?lang=id
+
+Read Sura
+quran_api/public/sura/1
+quran_api/public/sura/1?lang=id
+
 # Lumen PHP Framework
 
 [![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
